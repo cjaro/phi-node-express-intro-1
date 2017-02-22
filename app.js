@@ -1,8 +1,8 @@
-var express = require('express');
+var express = require('express');  //with no dots or slashes it goes straight to the node_modules folder
 var app = express();
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');  //DO NOT KNOW body parser
 
-app.use(express.static('public'));
+app.use(express.static('public'));  //are you a public folder?
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -17,19 +17,19 @@ var songList = [
   }
 ];
 
-app.get('/songs', function(req, res) {
+app.get('/songs', function(req, res) {   // here  /songs refers to a route
   res.send(songList);
 });
 
-app.post('/newSong', function(req, res){
+app.post('/newSong', function(req, res){ // here /newSong is the new url to find this stuff
   var newSong = req.body;
   if(newSong.artist !== "Justin Bieber"){
-    songList.push(newSong);
-    console.log(songList);
-    res.sendStatus(200);
+    songList.push(newSong); //if artist is not JB, proceed normally
+    console.log(songList);  //throw that shit on the new song thing
+    res.sendStatus(200); //success!
   } else {
-    res.sendStatus(500);
+    res.sendStatus(500); //otherwise, you're a failure to everyone in your life
   }
 });
 
-app.listen(3000);
+app.listen(3000); //listen for this port
